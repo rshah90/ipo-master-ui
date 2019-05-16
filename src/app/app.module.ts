@@ -14,9 +14,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { OrderActivityComponent } from './pages/forms/ipo/activity/order-activity/order-activity.component';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,OrderActivityComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,7 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-  ],
+  ],entryComponents:[OrderActivityComponent]
 })
 export class AppModule {
 }

@@ -4,7 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsComponent } from './forms.component';
 import { ClientMasterComponent } from './client/client-master/client-master.component';
 import { IpoMasterComponent } from './ipo/ipo-master/ipo-master.component';
-
+import { ClientReportComponent } from './ipo/client-report/client-report.component';
+import { AdminReportComponent } from './ipo/admin-report/admin-report.component';
+import {ActivityComponent } from './ipo/activity/activity.component';
 const routes: Routes = [{
   path: '',
   component: FormsComponent,
@@ -17,6 +19,16 @@ const routes: Routes = [{
       path: 'order',
       component: IpoMasterComponent,
     },
+    {
+      path: 'clientReport',
+      component: ClientReportComponent,
+    },{
+      path:'adminReport',
+      component:AdminReportComponent,
+    },{
+      path:'orderEntry',
+      component:ActivityComponent,
+    }
   ],
 }];
 
