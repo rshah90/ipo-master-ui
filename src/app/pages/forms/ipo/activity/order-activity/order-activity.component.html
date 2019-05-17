@@ -1,0 +1,47 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <nb-card style="width: 500px;">
+      <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> -->
+        <nb-card-body>
+              <nb-select placeholder="Client Name" style="padding: 0%"  [(selected)]="commonSelectedItem" formControlName="clientName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }">
+                   <nb-option *ngFor="let cname of userData" value={{cname.id}}>{{ cname.username }}</nb-option> 
+              </nb-select>
+              <div *ngIf="submitted && f.clientName.errors" class="invalid-feedback">
+                <div *ngIf="f.clientName.errors.required">Client Name is required</div>
+              </div>
+        </nb-card-body>
+        
+        <nb-card-body>
+            <input #name value="0.0"  nbInput placeholder="IPO Quantity" [(ngModel)]="quantiy" type="text"  formControlName="quantiy" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.quantiy.errors }" />
+            <div *ngIf="submitted && f.quantiy.errors" class="invalid-feedback">
+                <div *ngIf="f.quantiy.errors.required">IPO Quantity is required</div>
+            </div>
+        </nb-card-body>
+        <nb-card-body>
+            <input #name  value="0.0" nbInput placeholder="IPO Rate"  [(ngModel)]="rate" type="text" formControlName="rate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.rate.errors }" />
+            <div *ngIf="submitted && f.rate.errors" class="invalid-feedback">
+                <div *ngIf="f.rate.errors.required">IPO Rate is required</div>
+            </div>
+        </nb-card-body>
+        <nb-card-body>
+              <label style="color:white" class="form-control">{{  (quantiy * rate) || 0}}</label>
+        </nb-card-body>
+        <nb-card-body>
+            <input nbInput
+                    placeholder="Selling or Buying Date"
+                    [nbDatepicker]="formpicker" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+            <nb-datepicker #formpicker></nb-datepicker>
+            <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                <div *ngIf="f.date.errors.required">Date is required</div>
+            </div>
+        </nb-card-body>
+        <nb-card-body>
+            <nb-radio-group [(value)]="radioGroupValue" formControlName="mode"  class="form-control">
+                <nb-radio [value]="'Buy'" style="display: inline;"><span style="color: white">Buy</span></nb-radio>
+                <nb-radio [value]="'Sell'" style="display: inline; color: white"><span style="color: white;">Sell</span></nb-radio>
+            </nb-radio-group>
+        </nb-card-body>
+        <nb-card-footer style="text-align: center">
+          <button nbButton status="success">Submit</button>
+        </nb-card-footer>
+    </nb-card>
+  </form>
