@@ -1,0 +1,7 @@
+<input nbInput
+                     [(ngModel)]="cell.newValue" [name]="cell.getId()"
+       [disabled]="!cell.isEditable()" (click)="onClick.emit($event)" (keydown.enter)="onEdited.emit($event)"
+       (keydown.esc)="onStopEditing.emit()" style="height: 35px;"
+                    [nbDatepicker]="formpicker"   />
+            <nb-datepicker #formpicker></nb-datepicker>
+            
