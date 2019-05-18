@@ -5,6 +5,7 @@ import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { NbDialogRef } from '@nebular/theme';
 import { Router } from "@angular/router";
+import { DatePipe } from '@angular/common';
 
 export class ipoOrder{
   userId : Number;
@@ -12,9 +13,9 @@ export class ipoOrder{
   quantiy : Number;
   rate : Number;
   mode :String;
-  creationDate : Date;
+  creationDate : String;
 
-  constructor(userId : Number,ipoId : Number,quantiy : Number,rate : Number,mode :String,creationDate : Date){
+  constructor(userId : Number,ipoId : Number,quantiy : Number,rate : Number,mode :String,creationDate : String){
 
     this.userId =userId;
     this.ipoId =ipoId;
@@ -52,7 +53,8 @@ export class OrderActivityComponent{
   dialogRef: any;
   router: any;
   
-  constructor(private formBuilder: FormBuilder , private http: HttpClient,private activatedRoute: ActivatedRoute,protected ref: NbDialogRef<OrderActivityComponent>) { 
+  constructor(private formBuilder: FormBuilder , private http: HttpClient,private activatedRoute: ActivatedRoute,protected ref: NbDialogRef<OrderActivityComponent>
+    ,private datepipe: DatePipe) { 
   
   }
 
@@ -93,10 +95,11 @@ export class OrderActivityComponent{
     if (window.confirm('Are you sure you want to create Order Entry?')) {
       let headers: HttpHeaders = new HttpHeaders();
       headers = headers.append('Content-Type', 'application/json');
-
+      let newDate  =this.datepipe.transform(this.registerForm.controls['date'].value,"yyyy-MM-dd");
+     
        let order  = new ipoOrder(this.registerForm.controls['clientName'].value,Number(this.IPOId),
         this.registerForm.controls['quantiy'].value, this.registerForm.controls['rate'].value,
-        this.registerForm.controls['mode'].value,this.registerForm.controls['date'].value);
+        this.registerForm.controls['mode'].value,newDate);
         console.log("hi"+JSON.stringify(order));
       this.http.post("http://localhost:8080/create-order",JSON.stringify(order),{headers : headers}).subscribe((data  : any) =>{
         this.registerForm.value.id = data.id;

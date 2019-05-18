@@ -9,6 +9,7 @@ import { ClientReportComponent } from './ipo/client-report/client-report.compone
 import { AdminReportComponent } from './ipo/admin-report/admin-report.component';
 import {ActivityComponent } from './ipo/activity/activity.component';
 import {OrderActivityComponent } from './ipo/activity/order-activity/order-activity.component';
+import { DatePipe } from '@angular/common';
 @NgModule({
   imports: [
     ThemeModule,
@@ -23,6 +24,7 @@ import {OrderActivityComponent } from './ipo/activity/order-activity/order-activ
     AdminReportComponent,
     ActivityComponent
     
-  ]
+  ],
+  providers:[DatePipe]
 })
 export class FormsModule { }
