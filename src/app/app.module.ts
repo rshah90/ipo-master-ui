@@ -15,8 +15,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderActivityComponent } from './pages/forms/ipo/activity/order-activity/order-activity.component';
+import { SmartTableDatePickerComponent } from './pages/forms/smart-table-date-picker/smart-table-date-picker.component';
 @NgModule({
-  declarations: [AppComponent,OrderActivityComponent],
+  declarations: [AppComponent,OrderActivityComponent,SmartTableDatePickerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,7 +31,7 @@ import { OrderActivityComponent } from './pages/forms/ipo/activity/order-activit
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-  ],entryComponents:[OrderActivityComponent]
+  ],entryComponents:[OrderActivityComponent,SmartTableDatePickerComponent]
 })
 export class AppModule {
 }

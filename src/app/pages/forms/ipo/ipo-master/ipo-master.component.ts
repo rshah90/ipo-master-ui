@@ -4,7 +4,8 @@ import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { SmartTableData } from '../../../../@core/data/smart-table';
 import { Router } from '@angular/router';
 import { PagesService } from '../../../pages.service';
-
+import {SmartTableDatePickerComponent } from '../../smart-table-date-picker/smart-table-date-picker.component';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'ngx-ipo-master',
   templateUrl: './ipo-master.component.html',
@@ -51,17 +52,14 @@ export class IpoMasterComponent implements OnInit {
       },
       openDate: {
         title: 'Open Date',
-        type: 'date',
-        editor: {
-          type: 'date',
-        },
+        type: 'html',
+        editor: {type: 'custom', component: SmartTableDatePickerComponent,}
+      
       },
       closeDate: {
         title: 'Close Date',
-        type: 'date',
-        editor: {
-          type: 'date',
-        },
+        type: 'html',
+        editor: {type: 'custom', component: SmartTableDatePickerComponent,}
       },
       lotSize: {
         title: 'Lot Size',
@@ -85,7 +83,7 @@ export class IpoMasterComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private service: SmartTableData , private http : HttpClient , private router : Router
-    , private pagesService : PagesService) {
+    , private pagesService : PagesService, private datepipe: DatePipe) {
     //const data = this.service.getData();
    
     this.http.get("http://localhost:8080/get-ipo").subscribe((data  : any) =>{
@@ -107,11 +105,16 @@ export class IpoMasterComponent implements OnInit {
   }
 
   onCreateConfirm(event) : void {
-    console.log("hi");
+    console.log("hi"+event.newData.closeDate);
+    let openDate  =this.datepipe.transform(event.newData.openDate,"yyyy-MM-dd");
+    let closeDate  =this.datepipe.transform(event.newData.closeDate,"yyyy-MM-dd");
+    event.newData.openDate = openDate;
+    event.newData.closeDate = closeDate;
     if (window.confirm('Are you sure you want to create?')) {
+      console.log("hi"+event.newData.closeDate);
       this.http.post("http://localhost:8080/create-ipo",event.newData).subscribe((data  : any) =>{
       event.newData.id = data.id;
-      window.location.reload();
+     // window.location.reload();
       event.confirm.resolve(event.newData);
     });
 

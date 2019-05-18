@@ -8,8 +8,8 @@ import { IpoMasterComponent } from './ipo/ipo-master/ipo-master.component';
 import { ClientReportComponent } from './ipo/client-report/client-report.component';
 import { AdminReportComponent } from './ipo/admin-report/admin-report.component';
 import {ActivityComponent } from './ipo/activity/activity.component';
-import {OrderActivityComponent } from './ipo/activity/order-activity/order-activity.component';
 import { DatePipe } from '@angular/common';
+
 @NgModule({
   imports: [
     ThemeModule,

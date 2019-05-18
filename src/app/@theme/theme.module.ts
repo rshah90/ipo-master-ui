@@ -123,6 +123,7 @@ const COMPONENTS = [
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   ToggleSettingsButtonComponent,
+  
 ];
 
 const ENTRY_COMPONENTS = [
