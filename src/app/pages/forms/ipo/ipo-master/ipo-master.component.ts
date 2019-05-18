@@ -114,7 +114,7 @@ export class IpoMasterComponent implements OnInit {
       console.log("hi"+event.newData.closeDate);
       this.http.post("http://localhost:8080/create-ipo",event.newData).subscribe((data  : any) =>{
       event.newData.id = data.id;
-     // window.location.reload();
+      window.location.reload();
       event.confirm.resolve(event.newData);
     });
 
