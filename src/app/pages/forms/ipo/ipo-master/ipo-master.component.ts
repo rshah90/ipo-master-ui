@@ -104,6 +104,7 @@ export class IpoMasterComponent implements OnInit {
     }
   }
 
+  
   onCreateConfirm(event) : void {
     console.log("hi"+event.newData.closeDate);
     let openDate  =this.datepipe.transform(event.newData.openDate,"yyyy-MM-dd");
