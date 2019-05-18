@@ -22,7 +22,10 @@ export class ActivityComponent {
   
 
   settings = {
-    add: {
+    actions:{
+      add:false,
+    },
+    add:{
       addButtonContent: '<i class="nb-plus"></i>',
       confirmCreate: true,
       createButtonContent: '<i class="nb-checkmark"></i>',
@@ -72,6 +75,28 @@ export class ActivityComponent {
 
   }
 
+  onDeleteConfirm(event): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+      console.log("event.newData.id"+event.data)
+      this.http.get("http://localhost:8080/delete-orderInventory?id=" +event.data.id).subscribe((data  : any) =>{
+      
+        event.confirm.resolve(event.newData);
+      });
+    } else {
+      event.confirm.reject();
+    }
+  }
+  onSaveConfirm(event) : void {
+    console.log("hi");
+    if (window.confirm('Are you sure you want to update?')) {
+      this.http.post("http://localhost:8080/update-orderInventory",event.newData).subscribe((data  : any) =>{
+        window.location.reload();
+      event.confirm.resolve(event.newData);
+    });
+    } else {
+      event.confirm.reject();
+    }
+  }
 
   ngOnInit() {
     

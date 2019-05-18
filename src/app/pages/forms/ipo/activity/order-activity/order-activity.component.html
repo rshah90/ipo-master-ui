@@ -25,6 +25,7 @@
         <nb-card-body>
               <label style="color:white" class="form-control">{{  (quantiy * rate) || 0}}</label>
         </nb-card-body>
+        
         <nb-card-body>
             <input nbInput
                     placeholder="Selling or Buying Date"
@@ -35,11 +36,15 @@
             </div>
         </nb-card-body>
         <nb-card-body>
-            <nb-radio-group [(value)]="radioGroupValue" formControlName="mode"  class="form-control">
+            <nb-radio-group [(value)]="radioGroupValue" formControlName="mode"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mode.errors }">
                 <nb-radio [value]="'Buy'" style="display: inline;"><span style="color: white">Buy</span></nb-radio>
                 <nb-radio [value]="'Sell'" style="display: inline; color: white"><span style="color: white;">Sell</span></nb-radio>
             </nb-radio-group>
+            <div *ngIf="submitted && f.mode.errors" class="invalid-feedback">
+                <div *ngIf="f.mode.errors.required">Order Mode is required</div>
+            </div>
         </nb-card-body>
+        
         <nb-card-footer style="text-align: center">
           <button nbButton status="success">Submit</button>
         </nb-card-footer>

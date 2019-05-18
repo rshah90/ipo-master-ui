@@ -41,42 +41,42 @@ export class IpoMasterComponent implements OnInit {
     columns: {
       
       status: {
-        title: 'status',
+        title: 'Status',
         type: 'string',
         defaultValue: 'Active'
       },
       issuerCompany: {
-        title: 'issuerCompany',
+        title: 'Issuer Company',
         type: 'string',
       },
       openDate: {
-        title: 'openDate',
+        title: 'Open Date',
         type: 'date',
         editor: {
           type: 'date',
         },
       },
       closeDate: {
-        title: 'closeDate',
+        title: 'Close Date',
         type: 'date',
         editor: {
           type: 'date',
         },
       },
       lotSize: {
-        title: 'lotSize',
+        title: 'Lot Size',
         type: 'number',
       },
       issueLowerPrice: {
-        title: 'issueLowerPrice',
+        title: 'Issue Lower Price(rs)',
         type: 'number',
       },
       issueHigherPrice: {
-        title: 'issueHigherPrice',
+        title: 'Issue Higher Price(rs)',
         type: 'number',
       },
       issueSize: {
-        title: 'issueSize',
+        title: 'Issue Size(cr)',
         type: 'number',
       },
     },

@@ -3,6 +3,8 @@ import {FormBuilder , FormGroup , Validators} from '@angular/forms';
 import { LocalDataSource } from 'ng2-smart-table';
 import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { NbDialogRef } from '@nebular/theme';
+import { Router } from "@angular/router";
 
 export class ipoOrder{
   userId : Number;
@@ -47,7 +49,10 @@ export class OrderActivityComponent{
   IPOId : string ;
   source: LocalDataSource = new LocalDataSource();
   userData : user[];
-  constructor(private formBuilder: FormBuilder , private http: HttpClient,private activatedRoute: ActivatedRoute) { 
+  dialogRef: any;
+  router: any;
+  
+  constructor(private formBuilder: FormBuilder , private http: HttpClient,private activatedRoute: ActivatedRoute,protected ref: NbDialogRef<OrderActivityComponent>) { 
   
   }
 
@@ -57,7 +62,7 @@ export class OrderActivityComponent{
             quantiy: ['', Validators.required],
             rate: ['', Validators.required],
             date: ['', Validators.required],
-
+            mode: ['',Validators.required],
         });
 
         this.activatedRoute.queryParamMap.subscribe(params => {
@@ -80,47 +85,31 @@ export class OrderActivityComponent{
    onSubmit() : void {
 
     this.submitted = true;
-
     //stop here if form is invalid
     if (this.registerForm.invalid) {
         return;
     }
 
-    
-    if (window.confirm('Are you sure you want to create?')) {
+    if (window.confirm('Are you sure you want to create Order Entry?')) {
       let headers: HttpHeaders = new HttpHeaders();
       headers = headers.append('Content-Type', 'application/json');
 
        let order  = new ipoOrder(this.registerForm.controls['clientName'].value,Number(this.IPOId),
         this.registerForm.controls['quantiy'].value, this.registerForm.controls['rate'].value,
-        'Buy',this.registerForm.controls['date'].value);
+        this.registerForm.controls['mode'].value,this.registerForm.controls['date'].value);
         console.log("hi"+JSON.stringify(order));
       this.http.post("http://localhost:8080/create-order",JSON.stringify(order),{headers : headers}).subscribe((data  : any) =>{
         this.registerForm.value.id = data.id;
 
-        console.log(this.registerForm.value);
-        
-        // console.log(this.registerForm.value.id);
-        // console.log(data.id);
-
-      //event.confirm.resolve(this.registerForm.value);
+      console.log(this.registerForm.value);
+      this.ref.close();
+      window.location.reload();
+      
     });
     } else {
       //event.confirm.reject();
     }
   }
-
-
-  // onSubmit() {
-  //   this.submitted = true;
-
-  //   // stop here if form is invalid
-  //   if (this.registerForm.invalid) {
-  //       return;
-  //   }
-
-  //   alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
-  // }
 
 }
 

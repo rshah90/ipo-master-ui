@@ -43,15 +43,15 @@ export class ClientMasterComponent implements OnInit {
 //         show : false, 
       },
       username: {
-        title: 'Username',
+        title: 'Client Name',
         type: 'string',
       },
       email: {
-        title: 'E-mail',
+        title: 'E-mail ID',
         type: 'string',
       },
       phonenumber: {
-        title: 'Phonenumber',
+        title: 'Phone Number',
         type: 'number',
       },
     },
